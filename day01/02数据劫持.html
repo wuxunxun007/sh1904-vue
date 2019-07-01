@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>数据劫持</title>
+</head>
+<body>
+  
+</body>
+<script>
+  var Book = { name: 'HTML5从入门到放弃' }; // 默认情况下name 会有两个方法 get set
+  console.log(Book.name) // HTML5从入门到放弃 --- 调用了get
+  // Book.name = "《" + Book.name + "》"; // 相当于调用了set
+  // console.log(Book.name) // 《HTML5从入门到放弃》
+
+  var val = ""; // 
+  Object.defineProperty(Book, 'name', {
+    set (value) { // 劫持了name的set方法，处理数据
+    // val = value;
+      val = '《' +  value + '》';
+    }, 
+    get () {
+      return val;
+    }
+  }) 
+  Book.name = "JS从入门到放弃";
+  console.log(Book.name)
+</script>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vue数据双向绑定</title>
+</head>
+<body>
+  <div id="app">
+    <p>v-model属于vue中表单数输入的一个指令，实质是一个属性，属性的值是一个变量 msg</p>
+    <input type="text" v-model = "msg">
+    {{ msg }}
+  </div>
+</body>
+<script src="vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app', // element的意思
+    data: { // 提供给视图的数据
+      msg: 'hello world'
+    }
+  })
+</script>
+</html>

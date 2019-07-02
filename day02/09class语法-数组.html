@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .active {
+      color: #f66;
+      border: 1px solid #f66;
+    }
+    .font {
+      /* font-size: 30px; */
+      color: #333;
+      border: 1px solid #333;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- <div class="active">class语法 ---- 字符串写法</div> -->
+    <div :class="[active2, active1]"> class语法 ---- 数组写法 -- css中的顺序影响到最后的结果</div>
+    <div :class = "[ flag ? active1 : active2]">class语法 - 变量 - 三元运算符</div>
+  </div>
+</body>
+<script src="vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      active1: 'active',
+      active2: 'font',
+      flag: false
+    }
+  })
+</script>
+</html>

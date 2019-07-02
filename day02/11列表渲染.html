@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <li v-for='item of arr'>
+        {{ item }}
+      </li>
+    </ul>
+    <ul>
+      <li v-for='(item, index) of arr' :key = "index">
+        {{ item }}
+      </li>
+    </ul>
+    <ul>
+      <li v-for="(item, index) of cars" :key="index">
+        {{ item.brand }}
+        <ul>
+          <li v-for="(itm, idx) of item.items" :key="idx">
+            {{ itm }}
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</body>
+<script src="vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      arr: [11, 22, 33, 44, 55],
+      cars: [
+        {
+          brand: '宝马',
+          items: ['X5', 'X6']
+        },
+        {
+          brand: '奥迪',
+          items: ['Q7', 'A8']
+        }
+      ]
+    }
+  })
+</script>
+</html>

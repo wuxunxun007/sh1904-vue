@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .active {
+      color: #f66;
+      border: 1px solid #f66;
+    }
+    .font {
+      /* font-size: 30px; */
+      color: #333;
+      border: 1px solid #333;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- <div class="active">class语法 ---- 字符串写法</div> -->
+    <div :class="{ active: flag, font: !flag }" @click="changeFlag"> class语法 ---- 对象写法</div>
+
+  </div>
+</body>
+<script src="vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      flag: false
+    },
+    methods: {
+      changeFlag () {
+        // 改变初始化的数据
+        this.flag = !this.flag;
+      }
+    }
+  })
+</script>
+</html>

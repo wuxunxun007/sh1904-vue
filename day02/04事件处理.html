@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="say('hi')">say hi</button>
+    <button v-on:click="say('hello')">say hello</button>
+    <button v-on:click="getEvent">事件对象 --- 不传递任何参数，默认参数就为event</button>
+    <button v-on:click="getEvent1($event)">事件对象 --- 传递事件对象参数，必为$event</button>
+    <mark>事件对象可以阻止默认的事件，阻止冒泡......</mark>
+    <p>vue中可以不使用事件对象也可以阻止默认的事件以及阻止冒泡 ---- 事件修饰符</p>
+  </div>
+</body>
+<script src="vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+    },
+    methods: { // 所有的自定义函数必须放在这个选项内部
+      say (str) {
+        alert(str)
+      },
+      getEvent (event) {
+        console.log(event)
+      },
+      getEvent1 (event) {
+        console.log(event)
+      }
+    }
+  })
+</script>
+</html>

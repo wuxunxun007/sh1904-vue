@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    {{ msg }}
+    <div v-html="msg"></div>
+    <div v-text="msg"></div>
+  </div>
+</body>
+<script src="vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      msg: '<h1>vue的模板语法-文本</h1>'
+    }
+  })
+</script>
+</html>

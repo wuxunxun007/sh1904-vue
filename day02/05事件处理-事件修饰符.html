@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: #f66;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <p>.stop  阻止冒泡</p>
+    <div class="box" @click="clickBox">
+      <button @click="preventEventFn($event)">阻止冒泡-event</button>
+      <button @click.stop="preventVueFn">阻止冒泡-事件修饰符</button>
+    </div>
+    <p>.prevent 阻止默认事件</p>
+    <form action="https://www.baidu.com" @submit="goBaiduEvent">
+      <input type="submit" value = "提交 - event">
+    </form>
+    <form action="https://www.baidu.com" @submit.prevent="goBaiduVue">
+      <input type="submit" value = "提交 - vue">
+    </form>
+  </div>
+</body>
+<script src="vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+    },
+    methods: {
+      clickBox () {
+        console.log('box')
+      },
+      preventEventFn (event) {
+        event.stopPropagation() // dom操作
+        console.log('event')
+      },
+      preventVueFn () {
+        console.log('vue')
+      },
+      goBaiduEvent (event) {
+        event.preventDefault()
+      },
+      goBaiduVue () {
+      }
+    }
+  })
+</script>
+</html>

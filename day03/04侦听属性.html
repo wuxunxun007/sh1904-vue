@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>表单输入绑定</title>
+</head>
+<body>
+  <div id="app">
+   <input type="text" v-model="firstname"> + <input type="text" v-model="lastname"> = {{ fullname }}
+
+  </div>
+</body>
+<script src="vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      firstname: '吴',
+      lastname: '大勋',
+      fullname: '吴大勋'
+    },
+    watch: {
+      firstname (newVal, oldVal) {
+        this.fullname = newVal + this.lastname
+      },
+      lastname (newVal, oldVal) {
+        this.fullname = this.firstname + newVal
+      }
+    }
+  })
+</script>
+</html>

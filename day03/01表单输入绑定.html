@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>表单输入绑定</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" placeholder="用户名" v-model.lazy.trim="username" />{{username}}<br />
+    <input type="password" placeholder="密码" v-model="password" /><br />
+    <input type="email" placeholder="邮箱账号" v-model="email" /><br />
+    <input type="number" placeholder="年龄" min = "1" step="1" v-model.number="age" /><br />
+    <input type="radio" name="sex" value="1" v-model="sex">女
+    <input type="radio" name="sex" value="0" v-model="sex">男<br />
+    <input type="checkbox" name="hobby" value="篮球" v-model="hobby"/>篮球
+    <input type="checkbox" name="hobby" value="排球" v-model="hobby"/>排球
+    <input type="checkbox" name="hobby" value="网球" v-model="hobby"/>网球
+    <input type="checkbox" name="hobby" value="乒乓球" v-model="hobby"/>乒乓球
+    <input type="checkbox" name="hobby" value="足球" v-model="hobby"/>足球<br />
+    <select v-model="lesson">
+      <option disabled value="">请选择</option>
+      <option value="一阶段">一阶段</option>
+      <option value="二阶段">二阶段</option>
+      <option value="三阶段">三阶段</option>
+    </select><br />
+    <textarea v-model="note"></textarea><br />
+
+
+    <input type="checkbox" v-model="flag">已阅读用户相关信息<br />
+    <input type="button" value="获取信息" @click="getData">
+  </div>
+</body>
+<script src="vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      username: '吴大勋',
+      password: '123456',
+      email: '522864637@qq.com',
+      age: 18,
+      sex: "0",
+      hobby: ['篮球'],
+      flag: true,
+      lesson: '三阶段',
+      note: '这里是笔记'
+    },
+    methods: {
+      getData () {
+        const obj = {
+          username: this.username,
+          password: this.password,
+          email: this.email,
+          age: this.age,
+          sex: this.sex,
+          hobby: this.hobby,
+          flag: this.flag,
+          lesson: this.lesson,
+          note: this.note
+        }
+        console.log(obj)
+      }
+    }
+  })
+</script>
+</html>

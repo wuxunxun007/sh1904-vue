@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>表单输入绑定</title>
+</head>
+<body>
+  <div id="app">
+  </div>
+</body>
+<script src="vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+    },
+    mounted () {
+      fetch('https://www.daxunxun.com/users/login', {
+        method: 'post',
+        headers: { // 看后端的接口
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'username=18813007814&password=123456'
+      }).then(res => res.json()).then(data => {
+        console.log(data)
+      })
+      // fetch('https://www.daxunxun.com/users/login', {
+      //   method: 'post',
+      //   headers: { // 应该你要根据你们自己的接口来判断，本案例中适合'application/x-www-form-urlencoded'，不是'application/json'
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({
+      //     username: 18813007814,
+      //     password: 123456
+      //   })
+      // }).then(res => res.json()).then(data => {
+      //   console.log(data)
+      // })
+    }
+  })
+</script>
+</html>

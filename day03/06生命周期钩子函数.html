@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>表单输入绑定</title>
+</head>
+<body>
+  <div id="app">
+    {{ tip }}
+    <button @click="changeTip">汪慧上课偷吃东西</button>
+    <button @click="changeTip1">桂越看小说了</button>
+    <button @click="gameover">gg</button>
+  </div>
+</body>
+<script src="vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      tip: '上课不能吃东西'
+    },
+    methods: {
+      changeTip () {
+        this.tip = "汪慧上课偷吃东西，该罚"
+      },
+      changeTip1 () {
+        this.tip = "看小说了，为班级做贡献了"
+      },
+      gameover () {
+        this.$destroy() // 销毁
+      }
+    },
+    beforeCreate () { // 切忌使用箭头函数，切记不要使用箭头函数
+      console.log('准备怀')
+    },
+    created () {
+      console.log('怀上了')
+    },
+    beforeMount () {
+      console.log('准备生')
+    },
+    mounted () {
+      console.log('生了')
+    },
+    beforeUpdate () {
+      console.log('成长前--- 犯错误--- 上课吃东西')
+    },
+    updated () {
+      console.log('被抓住了-该做俯卧撑了')
+    },
+    beforeDestroy () {
+      console.log('快gg了')
+    },
+    destroyed () {
+      console.log('gg了')
+    }
+  })
+</script>
+</html>

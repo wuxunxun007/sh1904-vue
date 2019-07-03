@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>表单输入绑定</title>
+</head>
+<body>
+  <div id="app">
+  </div>
+</body>
+<script src="vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+    },
+    mounted () {
+      fetch('https://www.daxunxun.com/douban') // 得到的是promise对象
+        .then(res => res.json()) // promise对象转换成为json数据
+        .then(data => { // json数据，即为你需要请求的数据
+          console.log(data)
+        })
+    }
+  })
+</script>
+</html>

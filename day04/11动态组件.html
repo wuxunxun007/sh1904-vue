@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <button @click="type = 'v-aaa'">A组件</button>
+    <button @click="type = 'v-bbb'">B组件</button>
+    <button @click="type = 'v-ccc'">C组件</button>
+    <keep-alive include="aaa,bbb">
+      <component :is="type"></component>
+    </keep-alive>
+   
+  </div>
+</body>
+<template id="aaa">
+  <div>这是AAA组件<input /></div>
+</template>
+<template id="bbb">
+  <div>这是BBB组件<input /></div>
+</template>
+<template id="ccc">
+  <div>这是CCC组件<input /></div>
+</template>
+<script src="vue.js"></script>
+<script>
+  /**
+  动态组件默认情况下切换时都是先销毁掉原来的组件，再创建新的组件
+  加入需要保留上一次的结果，避免组件的重新渲染，可以使用<keep-alive></keep-alive>包裹component --- 手机中使用完某款软件，你按了一下HOME按键，此时应用并没有完全关闭
+  但是此时又有问题了，之前是全部都销毁了，现在是全部都缓存了
+  能不能只缓存需要的呢？
+  定义组件时添加name选项，keep-alive 添加include属性，值为name选项，需要缓存的写进去
+  keep-alive 会伴随有两个生命周期钩子函数  activated deactivated
+  activated () { // 激活  后台应用程序正在使用}
+  deactivated () { // 影藏  在后台应用中，但不是关闭了的（按了home键的）}
+  */
+  const AAA = {
+    name: 'aaa',
+    template: '#aaa'
+  }
+  const BBB = {
+    name: 'bbb',
+    template: '#bbb'
+  }
+  const CCC = {
+    name: 'ccc',
+    template: '#ccc'
+  }
+  const app = new Vue({
+    el: '#app',
+    data: {
+      type: 'v-aaa'
+    },
+    components: {
+      'v-aaa': AAA,
+      'v-bbb': BBB,
+      'v-ccc': CCC
+    }
+  })
+</script>
+</html>

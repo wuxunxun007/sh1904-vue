@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <my-app></my-app>
+  </div>
+</body>
+<template id="appTem">
+  <div>
+    这里是app页面
+    <my-banner ></my-banner>
+    <my-index ></my-index>
+  </div>
+</template>
+<template id="bannerTem">
+  <div>
+    这里是轮播图
+    <button @click="getIndex(1)">1</button>
+    <button @click="getIndex(2)">2</button>
+    <button @click="getIndex(3)">3</button>
+    <button @click="getIndex(4)">4</button>
+  </div>
+</template>
+<template id="indexTem">
+  <div>
+    现在是第{{ index }} 张图
+  </div>
+</template>
+<script src="vue.js"></script>
+<script>
+  // 中央事件总线（new Vue()）,一方负责监听bus.$on()，一方负责触发bus.$emit()
+  // 1/定义的是中央事件总线
+  const bus = new Vue()
+  const Index = {
+    template: '#indexTem',
+    data () {
+      return {
+        index: 1
+      }
+    },
+    mounted () {
+      // 2、监听事件
+      bus.$on('changeIndex', (index) => { // 如果不用箭头函数  that = this 
+        console.log(index)
+        // 4、后续业务逻辑
+        this.index = index
+      })
+    }
+  }
+  const Banner = {
+    template: '#bannerTem',
+    methods: {
+      getIndex (index) {
+        // 3、触发事件
+        bus.$emit('changeIndex', index)
+      }
+    }
+  }
+  const App = {
+    template: '#appTem',
+    components: {
+      "my-index": Index,
+      "my-banner": Banner
+    }
+  }
+
+  const app = new Vue({
+    el: '#app',
+    components: {
+      "my-app": App
+    }
+  })
+</script>
+</html>

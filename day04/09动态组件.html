@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <button @click="type = 'v-aaa'">A组件</button>
+    <button @click="type = 'v-bbb'">B组件</button>
+    <button @click="type = 'v-ccc'">C组件</button>
+    <!-- <v-aaa ></v-aaa>
+    <v-bbb ></v-bbb>
+    <v-ccc ></v-ccc> -->
+    <component :is="type"></component>
+  </div>
+</body>
+<template id="aaa">
+  <div>这是AAA组件</div>
+</template>
+<template id="bbb">
+  <div>这是BBB组件</div>
+</template>
+<template id="ccc">
+  <div>这是CCC组件</div>
+</template>
+<script src="vue.js"></script>
+<script>
+  const AAA = {
+    template: '#aaa'
+  }
+  const BBB = {
+    template: '#bbb'
+  }
+  const CCC = {
+    template: '#ccc'
+  }
+  const app = new Vue({
+    el: '#app',
+    data: {
+      type: 'v-aaa'
+    },
+    components: {
+      'v-aaa': AAA,
+      'v-bbb': BBB,
+      'v-ccc': CCC
+    }
+  })
+</script>
+</html>

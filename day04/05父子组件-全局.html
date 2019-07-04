@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <my-app></my-app>
+  </div>
+</body>
+<template id="appTem">
+  <div>
+    这里是app页面
+    <my-banner></my-banner>
+  </div>
+</template>
+<template id="bannerTem">
+    <div>
+      这里是轮播图
+    </div>
+  </template>
+<script src="vue.js"></script>
+<script>
+  const Banner = {
+    template: '#bannerTem'
+  }
+  const App = {
+    template: '#appTem'
+  }
+  Vue.component('my-app', App)
+  Vue.component('my-banner', Banner)
+  const app = new Vue({
+    el: '#app'
+  })
+</script>
+</html>

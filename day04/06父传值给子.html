@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <my-app></my-app>
+  </div>
+</body>
+<template id="appTem">
+  <div>
+    这里是app页面
+    <my-banner :tip="msg"></my-banner>
+  </div>
+</template>
+<template id="bannerTem">
+    <div>
+      这里是轮播图 ----- {{ tip }}
+    </div>
+  </template>
+<script src="vue.js"></script>
+<script>
+  // 父子组件传值： 父组件在调用子组件的地方，添加一个自定义的属性，属性的值就是你要传递给子组件的数据，如果值是一个变量，那么需要使用到绑定属性；在子组件定义的地方，添加一个props选项，值为一个数组，数组的元素就是父组件调用子组件时定义的属性名，这样就可以直接在子组件中通过自定义的属性名访问到父组件传递过来的数据
+  // 如果父子组件不是同一个人写的，即使是同一个人写的，可能不在同一天写的，那么怎么样判断你们传递的值是对的呢？ ---- 组件间的值得类型的校验
+  // 在定义子组件的地方，添加的props选项不再是一个数组，而是一个对象,对象中包含你的数据以及数据类型
+  // 如果还不满足要求呢？如果需要指明组件的默认值呢？
+  // 在定义子组件的低档，props为对象，对象中说明你的类型和默认值即可
+  const Banner = {
+    // props: ['tip'], // 不校验数据的格式
+    // props: { // 校验的数据格式
+    //   tip: Number // 期望的是number类型，实际是string
+    // },
+    props: {
+      tip: {
+        type: Number,// 校验的数据格式
+        default: 0 // 默认值如果未数组或者对象，需要使用函数实现
+        /**
+         * type: Array,
+         * default: function () {
+         *  return [1, 2, 3]
+         * }
+         * /
+      }
+    },
+    template: '#bannerTem'
+  }
+  const App = {
+    template: '#appTem',
+    data () {
+      return {
+        msg: '这个数据是父组件的'
+      }
+    },
+    components: { // App 是父组件，Banner是子组件
+      "my-banner": Banner
+    }
+  }
+
+  const app = new Vue({
+    el: '#app',
+    components: {
+      "my-app": App
+    }
+  })
+</script>
+</html>

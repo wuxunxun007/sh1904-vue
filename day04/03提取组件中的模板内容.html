@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 使用组件 -->
+    <my-header></my-header> 
+  </div>
+</body>
+<template id="a">
+    <div>这里是头部{{msg}}</div>
+</template>
+<script src="vue.js"></script>
+<script>
+  // 定义一个组件
+  const Header = {
+    template: '#a',
+    data () { // 组件的data是一个函数，返回的是一个对象
+      return {
+        msg: 'hello component'
+      }
+    }
+  }
+
+  // 全局注册组件 --- 一定是在new Vue之前
+  // Vue.component('my-header', Header)
+
+  const app = new Vue({
+    el: '#app',
+    data:{},
+    components: {
+      "my-header": Header
+    }
+  })
+</script>
+</html>

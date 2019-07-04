@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <my-app></my-app>
+  </div>
+</body>
+<template id="appTem">
+  <div>
+    这里是app页面
+    <my-banner @lalala='getData'></my-banner>
+  </div>
+</template>
+<template id="bannerTem">
+    <div>
+      这里是轮播图
+      <button @click="sendData">传值给父组件</button>
+    </div>
+  </template>
+<script src="vue.js"></script>
+<script>
+  // 子组件的某一个事件内部，通过this.$emit('事件名', 传递的值)传递数据
+  // 父组件在调用子组件的地方，绑定了子组件自定义的事件名，函数体记住不要加（）
+  // 定义父组件的地方，实现函数体，函数体会带有默认的参数，参数的值就是子组件传递的值
+  const Banner = {
+    template: '#bannerTem',
+    methods: {
+      sendData () {
+        this.$emit('lalala', 'hahaha')
+      }
+    }
+  }
+  const App = {
+    template: '#appTem',
+    data () {
+      return {
+        msg: '这个数据是父组件的'
+      }
+    },
+    methods: {
+      getData (str) {
+        console.log(str)
+      }
+    },
+    components: { // App 是父组件，Banner是子组件
+      "my-banner": Banner
+    }
+  }
+
+  const app = new Vue({
+    el: '#app',
+    components: {
+      "my-app": App
+    }
+  })
+</script>
+</html>

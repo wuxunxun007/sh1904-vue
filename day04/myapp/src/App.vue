@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <!-- <div class="container">
+      <header class="header">购物车头部</header>
+      <div class="content">购物车内容</div>
+    </div> -->
     <router-view></router-view>
     <footer class="footer">
       <ul>
@@ -46,6 +50,7 @@ html, body, #app {
     .content {
       @include flex();
       @include rect(100%, auto);
+      @include overflow();
     }
   }
   .footer {

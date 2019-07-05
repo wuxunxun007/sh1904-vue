@@ -10,7 +10,7 @@ export default new Router({
     {
       path: '/home', // 浏览器地址输入/home时
       name: 'home', // 路由的名字----命名路由
-      component: () => import('./views/home/index.vue')
+      component: () => import('./views/home/index.vue') // 路由的懒加载
     },
     {
       path: '/kind', // 浏览器地址输入/home时

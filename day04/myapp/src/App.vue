@@ -5,7 +5,8 @@
       <div class="content">购物车内容</div>
     </div> -->
     <router-view></router-view>
-    <footer class="footer">
+    <router-view name="footer"></router-view>
+    <!-- <footer class="footer">
       <ul>
         <router-link to="/home" tag="li">
           <span class = "iconfont icon-shouye"></span>
@@ -24,18 +25,18 @@
           <p>我的</p>
         </router-link>
       </ul>
-    </footer>
+    </footer> -->
   </div>
 </template>
 
 <style lang="scss">
 // 导入清除样式的文件 ---- 内部又导入了其他的文件
 @import '@/lib/reset.scss';
-html, body, #app {
+html, body, #app, .box {
   @include rect(100%, 100%); // width: 100%;height: 100%;
 }
 
-#app {
+#app, .box {
   @include flexbox(); // display: -webkit-box;display: -ms-flexbox;display: flex;
   @include flex-direction(column); //     -webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;
   .container {

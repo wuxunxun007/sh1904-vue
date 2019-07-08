@@ -1,27 +1,48 @@
 <template>
   <ul class="prolist">
-    <li class="proitem" v-for="(item, index) of prolist" :key="index">
+    <!-- <li class="proitem" v-for="(item, index) of prolist" :key="index">
       <div class="itemimg">
         <img :src="item.images.small" :alt="item.alt" />
       </div>
       <div class="iteminfo">
-        <h3>{{ item.title }}</h3>
+        <h3>{{ item.title }} --- {{ item.rating.average }}</h3>
         <div class="directors">
           导演：<span v-for="(itm, idx) of item.directors" :key="idx">{{ itm.name }}/</span>
         </div>
         <div class="casts">
           演员： <span v-for="(itm, idx) of item.casts" :key="idx">{{ itm.name }}/</span>
         </div>
+        <Rating :rating="(item.rating.average / 2).toFixed(1)"/>
       </div>
-    </li>
+    </li> -->
+    <router-link tag="li" :to="{ name: 'detail', params: { id: item.id }}" class="proitem" v-for="(item, index) of prolist" :key="index">
+      <div class="itemimg">
+        <img :src="item.images.small" :alt="item.alt" />
+      </div>
+      <div class="iteminfo">
+        <h3>{{ item.title }} --- {{ item.rating.average }}</h3>
+        <div class="directors">
+          导演：<span v-for="(itm, idx) of item.directors" :key="idx">{{ itm.name }}/</span>
+        </div>
+        <div class="casts">
+          演员： <span v-for="(itm, idx) of item.casts" :key="idx">{{ itm.name }}/</span>
+        </div>
+        <Rating :rating="(item.rating.average / 2).toFixed(1)"/>
+      </div>
+    </router-link>
   </ul>
 </template>
 
 <script>
+import Rating from '@/components/common/Rating'
+
 export default {
   // props: ['prolist']
   props: {
     prolist: Array
+  },
+  components: {
+    Rating
   }
 }
 </script>

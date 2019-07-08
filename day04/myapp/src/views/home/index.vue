@@ -9,7 +9,6 @@
 
 <script>
 import Prolist from '@/components/common/Prolist'
-
 export default {
   data () {
     return {

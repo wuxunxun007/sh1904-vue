@@ -17,20 +17,22 @@
           <Prolist :prolist = "prolist"/>
         </van-list>
       </van-pull-refresh>
-      <Backtop v-show="flag"/>
+      <div class="backTop" v-show = "flag" @click="backtop">
+        <van-icon name="upgrade" size="30px"/>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import { Swipe, SwipeItem, List, PullRefresh } from 'vant'
+import { Swipe, SwipeItem, List, PullRefresh, Icon } from 'vant'
 import Prolist from '@/components/common/Prolist'
-import Backtop from '@/components/Backtop'
 
 Vue.use(Swipe).use(SwipeItem)
 Vue.use(List)
 Vue.use(PullRefresh)
+Vue.use(Icon)
 export default {
   data () {
     return {
@@ -76,11 +78,14 @@ export default {
       } else {
         this.flag = false
       }
+    },
+    backtop () {
+      const content = document.querySelector('#content')
+      content.scrollTop = 0 // 可以自行扩展回到顶部的效果
     }
   },
   components: {
-    Prolist, // Prolist: Prolist
-    Backtop
+    Prolist // Prolist: Prolist
   },
   mounted () {
     // 请求轮播图数据 --- 可以使用axios请求数据，得先安装axios

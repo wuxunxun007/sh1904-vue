@@ -3,7 +3,7 @@
     <!-- <button>登陆</button>
     <button>注册</button> -->
     <van-button type="primary">登陆</van-button>
-    <van-button type="primary">注册</van-button>
+    <router-link to ="/register" ><van-button type="primary">注册</van-button></router-link>
   </div>
 </template>
 <script>

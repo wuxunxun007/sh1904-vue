@@ -16,6 +16,13 @@ export default new Router({
       redirect: '/user/nologin'
     },
     {
+      path: '/register',
+      name: 'register',
+      components: {
+        default: () => import('@/views/register/index.vue')
+      }
+    },
+    {
       // path: '/detail',
       path: '/detail/:id', // :代表此处的值为参数，id为参数的名字
       name: 'detail', // 如果需要动态传参，那么就需要使用到命名路由

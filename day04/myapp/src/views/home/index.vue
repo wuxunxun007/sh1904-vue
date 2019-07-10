@@ -17,7 +17,7 @@
           <Prolist :prolist = "prolist"/>
         </van-list>
       </van-pull-refresh>
-      <Backtop v-show="flag"/>
+      <Backtop :show="flag"/>
     </div>
   </div>
 </template>

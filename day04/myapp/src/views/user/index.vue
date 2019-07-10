@@ -13,7 +13,29 @@
 
 <script>
 export default {
-
+  beforeRouteEnter (to, from, next) {
+    console.log(to.name)
+    // if (to.name === 'user') {
+    //   if (localStorage.getItem('isLogin') === 'ok') {
+    //     next('/user/login')
+    //   } else {
+    //     next('/user/nologin')
+    //   }
+    // } else {
+    //   next()
+    // }
+    next(vm => {
+      if (to.name === 'user') {
+        if (localStorage.getItem('isLogin') === 'ok') {
+          vm.$router.replace('/user/login')
+        } else {
+          vm.$router.replace('/user/nologin')
+        }
+      } else {
+        next()
+      }
+    })
+  }
 }
 </script>
 

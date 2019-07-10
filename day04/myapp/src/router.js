@@ -2,8 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Footer from '@/components/Footer'
 Vue.use(Router)
-
-export default new Router({
+const router = new Router({
   mode: 'history', // 如果没有这句话，或者它的值为 hash, 为/#/home,如果设置为history, 为/home， 2的脚手架默认为hash模式
   base: process.env.BASE_URL,
   routes: [
@@ -11,15 +10,22 @@ export default new Router({
       path: '/',
       redirect: '/home'
     },
-    { // 路由的重定向
-      path: '/user',
-      redirect: '/user/nologin'
-    },
+    // { // 路由的重定向
+    //   path: '/user',
+    //   redirect: '/user/nologin'
+    // },
     {
       path: '/register',
       name: 'register',
       components: {
         default: () => import('@/views/register/index.vue')
+      }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      components: {
+        default: () => import('@/views/login/index.vue')
       }
     },
     {
@@ -56,6 +62,14 @@ export default new Router({
       components: {
         default: () => import('./views/cart/index.vue'),
         footer: Footer // 为什么不用懒加载，因为多出需要调用，先引入再使用
+      },
+      // 路由独享的守卫 --- 本来就是一个路由的配置文件，写什么业务逻辑
+      beforeEnter (to, from, next) {
+        if (localStorage.getItem('isLogin') === 'ok') {
+          next()
+        } else {
+          next('/login')
+        }
       }
     },
     {
@@ -91,3 +105,26 @@ export default new Router({
     }
   ]
 })
+
+// 全局导航守卫 ----- 一般不推荐使用 --- 后台管理系统
+// router.beforeEach((to, from, next) => {
+//   // console.log('from', from)
+//   console.log(to)
+//   // next() // 必须执行，否则终端路由的跳转
+//   // 所有的页面如果需要判断用户已经登陆
+//   // if (localStorage.getItem('isLogin') === 'ok') { // 会有内存溢出，登陆也是路由
+//   //   next()
+//   // } else {
+//   //   next('/login')
+//   // }
+//   if (to.name === 'login' || to.name === 'register') { // 防止内存溢出 --- 为了登陆必须得先注册
+//     next()
+//   } else {
+//     if (localStorage.getItem('isLogin') === 'ok') {
+//       next()
+//     } else {
+//       next('/login')
+//     }
+//   }
+// })
+export default router

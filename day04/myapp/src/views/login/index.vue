@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <van-nav-bar
-      title="注册"
-      right-text="登录"
+      title="登录"
+      right-text="注册"
       left-arrow
       @click-left="onClickLeft"
       @click-right="onClickRight"
@@ -29,18 +29,8 @@
           :error-message="passwordState"
           required
         />
-        <van-field
-          v-model="sms"
-          center
-          required
-          clearable
-          label="短信验证码"
-          placeholder="请输入短信验证码"
-        >
-          <van-button slot="button" @click="sendCode" size="small" type="primary">发送验证码</van-button>
-        </van-field>
       </van-cell-group>
-      <van-button type="primary" size="normal" @click="register" :block="true">注册</van-button>
+      <van-button type="primary" size="normal" @click="login" :block="true">登录</van-button>
     </div>
   </div>
 </template>
@@ -59,9 +49,7 @@ export default {
   data () {
     return {
       username: '18717771641',
-      password: '123456',
-      sms: '',
-      code: 'a.a.a?a*aa'
+      password: '123456'
     }
   },
   computed: {
@@ -107,27 +95,9 @@ export default {
       this.$router.back()
     },
     onClickRight () {
-      this.$router.replace('/login')
+      this.$router.replace('/register')
     },
-    sendCode () {
-      fetch('https://www.daxunxun.com/users/sendCode?tel=' + this.username)
-        .then(res => res.json())
-        .then(data => {
-          console.log(data)
-          if (data === 1) {
-            Toast('改手机号已经注册')
-          } else if (data === 0) {
-            Toast('获取验证码失败')
-          } else {
-            this.code = data.code // 模拟操纵
-          }
-        })
-    },
-    register () {
-      if (this.sms !== this.code) {
-        Toast('验证码错误')
-        return null
-      }
+    login () {
       if (this.usernameIcon !== 'checked') {
         Toast('手机号格式错误')
         return null
@@ -137,7 +107,7 @@ export default {
         return null
       }
       // 提交数据到服务器
-      fetch('https://www.daxunxun.com/users/register', {
+      fetch('https://www.daxunxun.com/users/login', {
         method: 'post',
         headers: { // 看后端的接口
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -145,20 +115,23 @@ export default {
         body: 'username=' + this.username + '&password=' + this.password
       }).then(res => res.json()).then(data => {
         if (data === 1) {
-          Toast('注册成功')
-          this.$router.push('/login')
+          Toast('登录成功')
+          localStorage.setItem('isLogin', 'ok')
+          this.$router.back()
         } else if (data === 2) {
           Dialog.confirm({
             title: '提示',
-            message: '该用户已经注册，是否直接登录'
+            message: '该用户还未注册，是否注册'
           }).then(() => {
             // on confirm
-            this.$router.push('/login')
+            this.$router.push('/register')
           }).catch(() => {
             // on cancel
           })
+        } else if (data === -1) {
+          Toast('密码错误')
         } else {
-          Toast('注册失败')
+          Toast('登录失败')
         }
       })
     }

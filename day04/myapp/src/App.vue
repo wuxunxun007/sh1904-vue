@@ -4,7 +4,11 @@
       <header class="header">购物车头部</header>
       <div class="content">购物车内容</div>
     </div> -->
-    <router-view></router-view>
+    <keep-alive>
+      <!-- 如果路由设置了meta，并且keepAlive为true,避免组件的重新渲染 -->
+      <router-view v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
+    <router-view v-if = "!$route.meta.keepAlive"></router-view>
     <router-view name="footer"></router-view>
     <!-- <footer class="footer">
       <ul>

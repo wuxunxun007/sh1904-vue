@@ -44,6 +44,9 @@ const router = new Router({
       components: {
         default: () => import('./views/home/index.vue'),
         footer: Footer // 为什么不用懒加载，因为多出需要调用，先引入再使用
+      },
+      meta: {
+        keepAlive: true
       }
     },
     {

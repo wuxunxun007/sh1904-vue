@@ -106,7 +106,17 @@ export default {
   beforeRouteLeave (from, to, next) { // 在离开这个路由之前 --- 导航守卫
     const content = document.querySelector('#content')
     content.removeEventListener('scroll', this.scrollFn)
+    let position = content.scrollTop
+    localStorage.setItem('position', position)
     next() // 继续执行后续的业务逻辑
+  },
+  watch: {
+    $route (newVal, oldVal) {
+      if (newVal.name === 'home') {
+        const content = document.querySelector('#content')
+        content.scrollTop = localStorage.getItem('position')
+      }
+    }
   }
 }
 </script>

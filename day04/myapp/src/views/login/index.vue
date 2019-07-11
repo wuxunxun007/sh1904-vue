@@ -116,6 +116,9 @@ export default {
       }).then(res => res.json()).then(data => {
         if (data === 1) {
           Toast('登录成功')
+          // 如果使用的token，当你登陆成功，后端返回了一个token值，你将此值存储到本地
+          // localStorage.setItem('token', 'sakhsdkjghjksdhfkjhsadhjahdkjsha')
+          // 以后在需要验证用户是否登陆时，将此值取出来，然后随着请求发送到服务器，数据库中会有一个字段与之对应，如果匹配，表适用户是登陆的，如果不匹配，表示未登录
           localStorage.setItem('isLogin', 'ok')
           this.$router.back()
         } else if (data === 2) {

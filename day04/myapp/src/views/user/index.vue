@@ -13,6 +13,17 @@
 
 <script>
 export default {
+  watch: {
+    $route (newVal, oldVal) {
+      if (newVal.name === 'user') {
+        if (localStorage.getItem('isLogin') === 'ok') {
+          this.$router.replace('/user/login')
+        } else {
+          this.$router.replace('/user/nologin')
+        }
+      }
+    }
+  },
   beforeRouteEnter (to, from, next) {
     console.log(to.name)
     // if (to.name === 'user') {

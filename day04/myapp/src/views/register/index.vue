@@ -115,7 +115,7 @@ export default {
         .then(data => {
           console.log(data)
           if (data === 1) {
-            Toast('改手机号已经注册')
+            Toast('该手机号已经注册')
           } else if (data === 0) {
             Toast('获取验证码失败')
           } else {

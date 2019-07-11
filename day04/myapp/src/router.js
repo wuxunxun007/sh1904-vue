@@ -65,15 +65,15 @@ const router = new Router({
       components: {
         default: () => import('./views/cart/index.vue'),
         footer: Footer // 为什么不用懒加载，因为多出需要调用，先引入再使用
-      },
-      // 路由独享的守卫 --- 本来就是一个路由的配置文件，写什么业务逻辑
-      beforeEnter (to, from, next) {
-        if (localStorage.getItem('isLogin') === 'ok') {
-          next()
-        } else {
-          next('/login')
-        }
       }
+      // 路由独享的守卫 --- 本来就是一个路由的配置文件，写什么业务逻辑
+      // beforeEnter (to, from, next) {
+      //   if (localStorage.getItem('isLogin') === 'ok') {
+      //     next()
+      //   } else {
+      //     next('/login')
+      //   }
+      // }
     },
     {
       path: '/user', // 浏览器地址输入/home时

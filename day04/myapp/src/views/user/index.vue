@@ -15,8 +15,9 @@
 export default {
   watch: {
     $route (newVal, oldVal) {
+      const { $store: { state: { loginState } } } = this
       if (newVal.name === 'user') {
-        if (localStorage.getItem('isLogin') === 'ok') {
+        if (loginState === 'ok') {
           this.$router.replace('/user/login')
         } else {
           this.$router.replace('/user/nologin')
@@ -36,8 +37,9 @@ export default {
     //   next()
     // }
     next(vm => {
+      const { $store: { state: { loginState } } } = vm
       if (to.name === 'user') {
-        if (localStorage.getItem('isLogin') === 'ok') {
+        if (loginState === 'ok') {
           vm.$router.replace('/user/login')
         } else {
           vm.$router.replace('/user/nologin')

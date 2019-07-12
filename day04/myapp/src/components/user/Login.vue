@@ -7,11 +7,14 @@
 <script>
 export default {
   beforeRouteEnter (to, from, next) {
-    if (localStorage.getItem('isLogin') === 'ok') {
-      next()
-    } else {
-      next('/user/nologin')
-    }
+    next(vm => {
+      const { $store: { state: { loginState } } } = vm
+      if (loginState === 'ok') {
+        next()
+      } else {
+        next('/user/nologin')
+      }
+    })
   }
 }
 </script>

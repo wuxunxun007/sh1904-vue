@@ -12,6 +12,7 @@
       <div class="content">
         {{ title }}
         <Rating :rating="(rating / 2).toFixed(1)"/>
+        {{ this.$store.getters.len }} --- {{ len }}
       </div>
     </div>
     <van-goods-action>
@@ -59,7 +60,7 @@
 import Vue from 'vue'
 import { GoodsAction, GoodsActionIcon, GoodsActionButton, Sku, NavBar } from 'vant'
 import Rating from '@/components/common/Rating'
-
+import { mapState, mapGetters } from 'vuex'
 Vue.use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton)
 Vue.use(Sku)
 Vue.use(NavBar)
@@ -136,6 +137,23 @@ export default {
   components: {
     Rating
   },
+  computed:{
+    ...mapState({
+      // loginState: (state) => { return state.loginState }
+      loginState: 'loginState',
+      list: 'list'
+    }),
+    // ...mapGetters({ // 获取值不能使用函数
+    //   len: 'len'
+    //   // len: () => {
+    //   //   console.log('222222222222222')
+    //   //   return 5
+    //   // }
+    // })
+    len () {
+      return this.list.length
+    }
+  },
   mounted () {
     // console.log(this.$route) // 打印当前路由的信息
     // const id = this.$route.params.id
@@ -160,11 +178,20 @@ export default {
       console.log('店铺')
     },
     addCart () {
-      console.log('加入购物车')
-      this.show = true
+      // this.show = true
+      const { $store: { state: { loginState } } } = this
+      if (loginState === 'ok') {
+        console.log('加入购物车')
+      } else {
+        this.$router.push('/login')
+      }
     },
     buy () {
-      console.log('立即购买')
+      if (this.loginState === 'ok') {
+        console.log('立即购买')
+      } else {
+        this.$router.push('/login')
+      }
     },
     back () {
       this.$router.back()

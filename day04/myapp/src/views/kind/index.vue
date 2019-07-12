@@ -19,14 +19,26 @@
         err="密码格式错误"
       />
     </div>
+    <ul>
+      <li v-for="(item, index) of kindlist" :key="index">
+        {{ item.title }}
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 import Myinput from '@/components/Myinput'
+import * as types from '@/mutation-types'
+import { mapState, mapActions } from 'vuex'
 export default {
   components: {
     Myinput
+  },
+  computed: {
+    ...mapState({
+      kindlist: state => state.kindlist
+    })
   },
   data () {
     return {
@@ -38,7 +50,20 @@ export default {
   methods: {
     add () {
       this.count += 1
-    }
+    },
+    ...mapActions({
+      getKindListData: 'getKindListData' // 前者代表 在当前组件生成getKindListData自定义的函数，后者代表状态管理器中的actinos
+    })
+  },
+  mounted () {
+    // fetch('https://www.daxunxun.com/douban').then(res => res.json()).then(data => {
+    //   console.log(data)
+    //   this.$store.commit(types.CHANGE_KIND_LIST, {
+    //     result: data
+    //   })
+    // })
+    // this.$store.dispatch('getKindListData')
+    this.getKindListData()
   }
 }
 </script>

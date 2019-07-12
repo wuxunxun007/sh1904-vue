@@ -137,22 +137,18 @@ export default {
   components: {
     Rating
   },
-  computed:{
+  computed: {
     ...mapState({
       // loginState: (state) => { return state.loginState }
       loginState: 'loginState',
       list: 'list'
     }),
-    // ...mapGetters({ // 获取值不能使用函数
-    //   len: 'len'
-    //   // len: () => {
-    //   //   console.log('222222222222222')
-    //   //   return 5
-    //   // }
-    // })
-    len () {
-      return this.list.length
-    }
+    ...mapGetters({ // 获取值不能使用函数
+      len: 'len'
+    })
+    // len () {
+    //   return this.list.length
+    // }
   },
   mounted () {
     // console.log(this.$route) // 打印当前路由的信息

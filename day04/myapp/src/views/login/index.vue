@@ -38,7 +38,8 @@
 <script>
 import Vue from 'vue'
 import { NavBar, Field, Cell, CellGroup, Button, Toast, Dialog } from 'vant'
-import { CHANGE_LOGIN_STATE } from '@/mutation-types'
+// import { CHANGE_LOGIN_STATE } from '@/mutation-types'
+import * as types from '@/mutation-types'
 Vue.use(NavBar)
 Vue.use(Field)
 Vue.use(Cell).use(CellGroup)
@@ -132,8 +133,12 @@ export default {
           //   type: 'changeLoginState',
           //   result: 'ok'
           // })
+          // this.$store.commit({
+          //   type: CHANGE_LOGIN_STATE,
+          //   result: 'ok'
+          // })
           this.$store.commit({
-            type: CHANGE_LOGIN_STATE,
+            type: types.CHANGE_LOGIN_STATE,
             result: 'ok'
           })
           this.$router.back()

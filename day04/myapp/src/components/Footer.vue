@@ -11,7 +11,7 @@
         </router-link>
         <router-link to="/cart" tag="li">
           <span class = "iconfont icon-gouwuche"></span>
-          <p>购物车</p>
+          <p>购物车{{ $store.getters.totalNum }}</p>
         </router-link>
         <router-link to="/user" tag="li">
           <span class = "iconfont icon-weibiaoti2fuzhi12"></span>

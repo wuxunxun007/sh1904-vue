@@ -8,11 +8,26 @@ export default new Vuex.Store({
   state: { // 需要管理的组件的状态
     loginState: '',
     list: [1, 2, 3, 4, 5, 6],
-    kindlist: []
+    kindlist: [],
+    cartlist: []
   },
   getters: { // 可以看做是 state 的计算属性,类似于组件中的 data 与 computed
     len (state) {
-      return state.list.length
+      return state.cartlist.length
+    },
+    totalNum (state) {
+      let totalNum = 0
+      state.cartlist.map(item => {
+        item.flag ? totalNum += item.num : totalNum += 0
+      })
+      return totalNum
+    },
+    totalPrice (state) {
+      let totalPrice = 0
+      state.cartlist.map(item => {
+        item.flag ? totalPrice += item.num * item.price : totalPrice += 0
+      })
+      return totalPrice
     }
   },
   mutations: { // 唯一改变状态的地方
@@ -27,6 +42,9 @@ export default new Vuex.Store({
     },
     [types.CHANGE_KIND_LIST] (state, data) {
       state.kindlist = data.result
+    },
+    changeCartList (state, data) {
+      state.cartlist = data.result
     }
   },
   actions: { // 异步操作

@@ -29,7 +29,7 @@
 
 <script>
 import Myinput from '@/components/Myinput'
-import * as types from '@/mutation-types'
+// import * as types from '@/mutation-types'
 import { mapState, mapActions } from 'vuex'
 export default {
   components: {

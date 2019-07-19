@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Footer from '@/components/Footer'
 Vue.use(Router)
 const router = new Router({
-  mode: 'history', // 如果没有这句话，或者它的值为 hash, 为/#/home,如果设置为history, 为/home， 2的脚手架默认为hash模式
+  mode: 'hash', // 如果没有这句话，或者它的值为 hash, 为/#/home,如果设置为history, 为/home， 2的脚手架默认为hash模式
   base: process.env.BASE_URL,
   routes: [
     { // 路由的重定向

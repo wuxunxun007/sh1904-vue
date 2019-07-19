@@ -1,4 +1,5 @@
 module.exports = {
+  publicPath: './',
   devServer: {
     // proxy: 'https://dsapi.beibei.com'
     proxy: {
